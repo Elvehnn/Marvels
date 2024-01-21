@@ -4,4 +4,5 @@ export const PATH = {
   SEARCH_RESULTS: '/search',
   BOOK: '/search/book/:id',
   NOT_FOUND: '*',
+  SIGN_IN: '/signin',
 };

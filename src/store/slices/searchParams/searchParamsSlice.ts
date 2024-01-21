@@ -1,5 +1,3 @@
-import { FILTERS } from '../../../constants/filters';
-import { SORT_TYPES } from '../../../constants/sortTypes';
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { ITEMS_PER_PAGE } from '../../../constants/constants';

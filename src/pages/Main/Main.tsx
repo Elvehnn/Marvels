@@ -1,15 +1,16 @@
 import Link from '@mui/material/Link';
 import MainLayout from '../../components/MainLayout/MainLayout';
+import { memo } from 'react';
 
 const Main = () => {
   return (
     <MainLayout background isMainPage>
-      <>
-        <Link href="#">Войти</Link>
+      <div className="container">
+        <Link href="/signin">Войти</Link>
         <Link href="/search">Искать</Link>
-      </>
+      </div>
     </MainLayout>
   );
 };
 
-export default Main;
+export default memo(Main);

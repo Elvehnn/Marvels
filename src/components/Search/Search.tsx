@@ -5,9 +5,7 @@ import Button from '@mui/material/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
-import { FILTERS } from '../../constants/filters';
 import { isFieldEmpty } from '../../services/validators';
-import { SORT_TYPES } from '../../constants/sortTypes';
 import { isLoadingActions, isLoadingSelectors } from '../../store/slices/isLoading/isLoadingSlice';
 import { errorActions } from '../../store/slices/error/errorSlice';
 import { totalItemsActions } from '../../store/slices/totalItems/totalItemsSlice';
@@ -84,7 +82,7 @@ export const Search = (style: SearchPanelStyle) => {
   const handleReset = () => {
     dispatch(searchParamsActions.resetSearchParams());
     localStorage.removeItem('lastSearch');
-    reset({ newSearchValue: '', newSortBy: SORT_TYPES.DEFAULT, newCategory: FILTERS.DEFAULT });
+    reset({ newSearchValue: '' });
   };
 
   return (
@@ -131,33 +129,6 @@ export const Search = (style: SearchPanelStyle) => {
         </div>
 
         <div className="search__options">
-          {/* <select
-            defaultValue={sortBy}
-            className="search__sortBy"
-            data-testid="search-sortBy"
-            {...register('newSortBy')}
-          >
-            <option value={SORT_TYPES.DEFAULT}>{SORT_TYPES.DEFAULT}</option>
-            <option value={SORT_TYPES.NEWEST}>{SORT_TYPES.NEWEST}</option>
-          </select>
-
-          <select
-            defaultValue={category}
-            className="search__categories"
-            data-testid="search-categories"
-            {...register('newCategory')}
-          >
-            <option value="0" disabled>
-              Categories
-            </option>
-            <option value={FILTERS.DEFAULT}>{FILTERS.DEFAULT}</option>
-            <option value={FILTERS.ART}>{FILTERS.ART}</option>
-            <option value={FILTERS.BIORAPHY}>{FILTERS.BIORAPHY}</option>
-            <option value={FILTERS.COMPUTERS}>{FILTERS.COMPUTERS}</option>
-            <option value={FILTERS.HISTORY}>{FILTERS.HISTORY}</option>
-            <option value={FILTERS.MEDICAL}>{FILTERS.MEDICAL}</option>
-            <option value={FILTERS.POETRY}>{FILTERS.POETRY}</option>
-          </select> */}
           <Button
             variant="outlined"
             className="search__reset-btn"

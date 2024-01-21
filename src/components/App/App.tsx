@@ -11,6 +11,8 @@ import BookPage from '../../pages/BookPage/BookPage';
 import { errorSelectors } from '../../store/slices/error/errorSlice';
 import SearchPage from '../../pages/SearchPage/SearchPage';
 import { ErrorBoundary } from '../../pages/ErrorPage/ErrorBoundary';
+import SigninPage from '../../pages/SigninPage/SigninPage';
+import { memo } from 'react';
 
 const App = () => {
   const { error } = useAppSelector(errorSelectors.all);
@@ -25,6 +27,7 @@ const App = () => {
               <Route path={PATH.SEARCH_RESULTS} element={<SearchPage />} />
               <Route path={PATH.NOT_FOUND} element={<ErrorPage {...error} />} />
               <Route path={PATH.BOOK} element={<BookPage />} />
+              <Route path={PATH.SIGN_IN} element={<SigninPage />} />
             </Routes>
           </Router>
         </ThemeProvider>
@@ -33,4 +36,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default memo(App);

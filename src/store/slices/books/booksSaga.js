@@ -1,5 +1,3 @@
-import { FILTERS } from '../../../constants/filters';
-import { SORT_TYPES } from '../../../constants/sortTypes';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { booksActions } from './booksSlice';
 import { totalItemsActions } from '../totalItems/totalItemsSlice';

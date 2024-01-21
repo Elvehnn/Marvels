@@ -1,6 +1,5 @@
 .main {
   width: 100%;
-  // height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +9,13 @@
   background-position: center;
   row-gap: 20px;
   position: relative;
+  padding: 100px;
+  .container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
     height: 100%;

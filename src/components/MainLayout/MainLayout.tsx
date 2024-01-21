@@ -1,11 +1,11 @@
-import { FC, ReactElement, useRef } from 'react';
+import { FC, memo, useRef } from 'react';
 import Footer from '../Footer/Footer';
 import { Search, SearchPanelStyle } from '../Search/Search';
 import './MainLayout.scss';
 import { CSSTransition } from 'react-transition-group';
 
 type MainLayoutProps = {
-  children?: ReactElement;
+  children?: React.ReactNode;
   isMainPage?: boolean;
   searchStyle?: SearchPanelStyle;
   background?: boolean;
@@ -16,7 +16,7 @@ const MainLayout: FC<MainLayoutProps> = ({
   searchStyle,
   background,
   isMainPage = false,
-}) => {
+}: MainLayoutProps) => {
   const mainBackground = background
     ? {
         background: `url('./marvel-cinematic-poster.jpg') no-repeat top center / cover`,
@@ -43,4 +43,4 @@ const MainLayout: FC<MainLayoutProps> = ({
   );
 };
 
-export default MainLayout;
+export default memo(MainLayout);
