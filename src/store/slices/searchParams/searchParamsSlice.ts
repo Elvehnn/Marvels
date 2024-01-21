@@ -6,15 +6,11 @@ import { ITEMS_PER_PAGE } from '../../../constants/constants';
 
 export type SearchParams = {
   searchValue: string;
-  category: string;
-  sortBy: string;
   startIndex?: number;
 };
 
 const INITIAL_SEARCH_PARAMS = {
   searchValue: '',
-  category: FILTERS.DEFAULT,
-  sortBy: SORT_TYPES.DEFAULT,
   startIndex: 0,
 };
 

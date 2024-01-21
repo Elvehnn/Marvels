@@ -33,9 +33,9 @@ const SearchResults = () => {
   const handleLoadMoreClick = async () => {
     dispatch(isLoadingActions.setIsLoading(true));
 
-    const { searchValue, category, sortBy, startIndex } = searchParams;
+    const { searchValue, startIndex } = searchParams;
 
-    dispatch(booksActions.getBooksArray({ searchValue, category, sortBy, startIndex }));
+    dispatch(booksActions.getBooksArray({ searchValue, startIndex }));
     dispatch(searchParamsActions.incrementStartIndex());
 
     const isBooksArrayFull = booksArray.length !== 0 && startIndex + +ITEMS_PER_PAGE >= totalItems;
@@ -82,7 +82,7 @@ const SearchResults = () => {
         </div>
       </CSSTransition>
 
-      {booksArray.length && booksArray.length >= 30 ? (
+      {booksArray.length && booksArray.length >= 20 ? (
         <LoadingButton
           size="medium"
           onClick={handleLoadMoreClick}
@@ -95,7 +95,7 @@ const SearchResults = () => {
         </LoadingButton>
       ) : null}
 
-      {booksArray.length && booksArray.length >= 30 ? (
+      {booksArray.length && booksArray.length >= 20 ? (
         <Fab
           variant="circular"
           onClick={() => window.scrollTo(0, 0)}

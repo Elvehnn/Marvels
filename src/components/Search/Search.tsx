@@ -42,7 +42,7 @@ export const Search = (style: SearchPanelStyle) => {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector(isLoadingSelectors.all);
   const { searchParams } = useAppSelector(searchParamsSelectors.all);
-  const { searchValue, category, sortBy } = searchParams;
+  const { searchValue } = searchParams;
 
   const {
     register,
@@ -73,8 +73,6 @@ export const Search = (style: SearchPanelStyle) => {
 
     const newSearchParams = {
       searchValue: data.newSearchValue,
-      category: data.newCategory,
-      sortBy: data.newSortBy,
     };
 
     dispatch(booksActions.getBooksArray(newSearchParams));
@@ -133,7 +131,7 @@ export const Search = (style: SearchPanelStyle) => {
         </div>
 
         <div className="search__options">
-          <select
+          {/* <select
             defaultValue={sortBy}
             className="search__sortBy"
             data-testid="search-sortBy"
@@ -159,7 +157,7 @@ export const Search = (style: SearchPanelStyle) => {
             <option value={FILTERS.HISTORY}>{FILTERS.HISTORY}</option>
             <option value={FILTERS.MEDICAL}>{FILTERS.MEDICAL}</option>
             <option value={FILTERS.POETRY}>{FILTERS.POETRY}</option>
-          </select>
+          </select> */}
           <Button
             variant="outlined"
             className="search__reset-btn"

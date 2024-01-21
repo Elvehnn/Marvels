@@ -15,7 +15,7 @@ export function* workBookDetails({ payload }) {
     const response = yield call(getVolumeById, payload);
 
     if (response && response.status === 200) {
-      yield put(bookDetailsActions.setBookDetails(response.data));
+      yield put(bookDetailsActions.setBookDetails(response.data.data.results[0]));
     }
   } catch (error) {
     yield put(
@@ -30,18 +30,18 @@ export function* workBookDetails({ payload }) {
 }
 
 function* workGetBooksArray({ payload }) {
-  const { searchValue, category, sortBy, startIndex = 0 } = payload;
-  const categoryOption = category === FILTERS.DEFAULT ? '' : `+subject:${category}`;
-  const sortingOption = sortBy === SORT_TYPES.DEFAULT ? '' : `&orderBy=${sortBy}`;
-  const options = `${categoryOption}${sortingOption}&startIndex=${startIndex}`;
+  const { searchValue, startIndex = 0 } = payload;
+  const options = `&offset=${startIndex}`;
 
   try {
     const searchResults = yield call(getVolumesByTermsRequest, searchValue, options);
 
-    if (searchResults && searchResults.data.totalItems > 0) {
-      yield put(booksActions.setBooksArray(searchResults.data.items));
+    console.log(searchResults.data.data.results);
 
-      if (!startIndex) yield put(totalItemsActions.setTotalItems(searchResults.data.totalItems));
+    if (searchResults && searchResults.data.data.total > 0) {
+      yield put(booksActions.setBooksArray(searchResults.data.data.results));
+
+      if (!startIndex) yield put(totalItemsActions.setTotalItems(searchResults.data.data.total));
     } else {
       yield put(
         errorActions.setError({

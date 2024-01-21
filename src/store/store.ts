@@ -10,22 +10,19 @@ import { bookDetailsReducer } from './slices/bookDetails/bookDetailsSlice';
 
 const saga = createSagaMiddleware();
 
-export const createStore = (preloadedState: Record<string, unknown>) => {
-  return configureStore({
-    reducer: {
-      booksArray: booksReducer,
-      totalItems: totalItemsReducer,
-      searchParams: searchParamsReducer,
-      isLoading: isLoadingReducer,
-      error: errorReducer,
-      bookDetails: bookDetailsReducer,
-    },
-    middleware: [saga],
-    preloadedState,
-  });
-};
+export const store = configureStore({
+  reducer: {
+    booksArray: booksReducer,
+    totalItems: totalItemsReducer,
+    searchParams: searchParamsReducer,
+    isLoading: isLoadingReducer,
+    error: errorReducer,
+    bookDetails: bookDetailsReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(saga),
+});
 
-export const store = createStore({});
+export default store;
 
 saga.run(rootSaga);
 

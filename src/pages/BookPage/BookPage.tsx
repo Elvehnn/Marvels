@@ -19,6 +19,10 @@ const BookPage = () => {
   const { bookDetails } = useAppSelector(bookDetailsSelectors.all);
   const { isLoading } = useAppSelector(isLoadingSelectors.all);
 
+  console.log('bookDetails', bookDetails);
+  console.log(bookDetails.id);
+  console.log(params);
+
   useEffect(() => {
     dispatch(bookDetailsActions.getBookDetails(params));
   }, [params]);
@@ -26,36 +30,34 @@ const BookPage = () => {
   return (
     <>
       <CSSTransition
-        in={bookDetails.id === params}
+        in={bookDetails.id === +params}
         nodeRef={nodeRef}
         timeout={300}
         classNames="opacity"
         unmountOnExit
       >
-        {bookDetails.id === params && (
+        {bookDetails.id === +params && (
           <div className="book-page" data-testid="book-page" ref={nodeRef}>
             <div className="book-page__image-container" data-testid="book-page-image-container">
               <img
-                src={`${bookDetails.volumeInfo.imageLinks.thumbnail}`}
+                src={`${bookDetails.thumbnail.path}/portrait_incredible.${bookDetails.thumbnail.extension}`}
                 alt="book-cover"
                 className="image"
               />
             </div>
             <div className="book-page__info" data-testid="book-page-info">
-              <Typography className="book-page__categories" variant="h5">
-                {bookDetails.volumeInfo.categories?.join(' / ')}
-              </Typography>
               <Typography
                 className="book-page__title"
                 variant="h4"
                 sx={{ fontWeight: '600', m: '15px 0' }}
               >
-                {bookDetails.volumeInfo.title}
+                {bookDetails.title}
               </Typography>
+
+              <p className="book-page__description">{bookDetails.description}</p>
               <Typography className="book-page__authors" variant="h5">
-                {bookDetails.volumeInfo.authors?.join(',  ')}
+                {bookDetails.prices[0].price}
               </Typography>
-              <p className="book-page__description">{bookDetails.volumeInfo?.description}</p>
 
               <Button
                 variant="contained"

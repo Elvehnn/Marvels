@@ -11,7 +11,7 @@ export const BookPreview = (props: Book) => {
   const dispatch = useAppDispatch();
 
   const handleBookPreviewClick = async (book: Book) => {
-    dispatch(bookDetailsActions.getBookDetails(book.id));
+    dispatch(bookDetailsActions.getBookDetails(String(book.id)));
     navigate(`book/${book.id}`);
   };
 
@@ -34,24 +34,18 @@ export const BookPreview = (props: Book) => {
         className="book__preview"
         data-testid="book-preview"
         style={{
-          background: `url('${props.volumeInfo.imageLinks?.smallThumbnail}') no-repeat center center `,
+          background: `url('${props.thumbnail.path}/portrait_small.${props.thumbnail.extension}') no-repeat center center `,
           backgroundSize: 'contain',
         }}
       ></div>
       <div className="book__info">
-        <Typography className="book__category" data-testid="book-category" variant="h6">
-          {props.volumeInfo.categories}
-        </Typography>
         <Typography
           className="book__title"
           data-testid="book-title"
           variant="h5"
           sx={{ fontWeight: '600' }}
         >
-          {props.volumeInfo.title}
-        </Typography>
-        <Typography className="book__author" data-testid="book-author" variant="h6">
-          {props.volumeInfo.authors && props.volumeInfo.authors.join(',  ')}
+          {props.title}
         </Typography>
       </div>
     </Card>
