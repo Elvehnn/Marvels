@@ -11,6 +11,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { isLoadingSelectors } from '../../store/slices/isLoading/isLoadingSlice';
 import { CSSTransition } from 'react-transition-group';
+import MainLayout from '../../components/MainLayout/MainLayout';
 
 const BookPage = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +29,7 @@ const BookPage = () => {
   }, [params]);
 
   return (
-    <>
+    <MainLayout>
       <CSSTransition
         in={bookDetails.id === +params}
         nodeRef={nodeRef}
@@ -77,7 +78,7 @@ const BookPage = () => {
       </CSSTransition>
 
       {isLoading && <CircularProgress sx={{ position: 'absolute' }} />}
-    </>
+    </MainLayout>
   );
 };
 

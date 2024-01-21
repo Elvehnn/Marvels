@@ -4,7 +4,7 @@ import { totalItemsActions } from '../totalItems/totalItemsSlice';
 import { errorActions } from '../error/errorSlice';
 import { isLoadingActions } from '../isLoading/isLoadingSlice';
 import { bookDetailsActions } from '../bookDetails/bookDetailsSlice';
-import { getVolumesByTermsRequest, getVolumeById } from '../../../api/api';
+import { getVolumesByTitleRequest, getVolumeById } from '../../../api/api';
 
 export function* workBookDetails({ payload }) {
   yield put(isLoadingActions.setIsLoading(true));
@@ -32,7 +32,7 @@ function* workGetBooksArray({ payload }) {
   const options = `&offset=${startIndex}`;
 
   try {
-    const searchResults = yield call(getVolumesByTermsRequest, searchValue, options);
+    const searchResults = yield call(getVolumesByTitleRequest, searchValue, options);
 
     console.log(searchResults.data.data.results);
 

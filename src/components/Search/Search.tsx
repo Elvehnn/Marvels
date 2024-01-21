@@ -1,6 +1,5 @@
 import './Search.scss';
 import { useForm } from 'react-hook-form';
-import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import SearchIcon from '@mui/icons-material/Search';
@@ -16,6 +15,8 @@ import {
 } from '../../store/slices/searchParams/searchParamsSlice';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../constants/paths';
+import Box from '@mui/material/Box';
+import { memo } from 'react';
 
 export type FormInputs = {
   newSearchValue: string;
@@ -35,12 +36,12 @@ export type SearchPanelStyle = {
   rowGap?: string;
 };
 
-export const Search = (style: SearchPanelStyle) => {
+const Search = (style: SearchPanelStyle) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector(isLoadingSelectors.all);
   const { searchParams } = useAppSelector(searchParamsSelectors.all);
-  const { searchValue } = searchParams;
+  const { searchValue, startIndex } = searchParams;
 
   const {
     register,
@@ -71,10 +72,11 @@ export const Search = (style: SearchPanelStyle) => {
 
     const newSearchParams = {
       searchValue: data.newSearchValue,
+      startIndex: startIndex,
     };
 
     dispatch(booksActions.getBooksArray(newSearchParams));
-    dispatch(searchParamsActions.setSearchParams({ ...newSearchParams, startIndex: 30 }));
+    dispatch(searchParamsActions.setSearchParams({ ...newSearchParams, startIndex: 20 }));
     localStorage.setItem('lastSearch', JSON.stringify({ ...newSearchParams, startIndex: 0 }));
     navigate(PATH.SEARCH_RESULTS);
   };
@@ -86,7 +88,7 @@ export const Search = (style: SearchPanelStyle) => {
   };
 
   return (
-    <AppBar className="header" data-testid="header" sx={style}>
+    <Box>
       <h1 className="header__title" data-testid="header-title" onClick={handleTitleClick}>
         Book search
       </h1>
@@ -123,12 +125,21 @@ export const Search = (style: SearchPanelStyle) => {
             >
               <SearchIcon sx={{ color: '#fff' }} />
             </Button>
+            <Button
+              variant="outlined"
+              className="search__reset-btn"
+              data-testid="search-reset-btn"
+              onClick={handleReset}
+              disabled={isLoading}
+            >
+              Reset
+            </Button>
           </div>
 
           {errors.newSearchValue && <p>Value is required!</p>}
         </div>
 
-        <div className="search__options">
+        {/* <div className="search__options">
           <Button
             variant="outlined"
             className="search__reset-btn"
@@ -138,8 +149,10 @@ export const Search = (style: SearchPanelStyle) => {
           >
             Reset
           </Button>
-        </div>
+        </div> */}
       </form>
-    </AppBar>
+    </Box>
   );
 };
+
+export default memo(Search);

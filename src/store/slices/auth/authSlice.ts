@@ -14,8 +14,7 @@ export const authSlice = createSlice({
 });
 
 export const authSelectors = {
-  all: (state: RootState) => state.searchParams,
-  startIndex: (state: RootState) => state.searchParams.searchParams.startIndex,
+  all: (state: RootState) => state.isAuth,
 };
 
 export const authActions = authSlice.actions;
