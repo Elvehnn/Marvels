@@ -18,14 +18,16 @@ export interface Action {
 }
 
 export interface Book {
-  id: string;
-  volumeInfo: {
-    imageLinks: { [key: string]: string };
-    title: string;
-    authors: string[];
-    categories: string[];
-    description: string;
+  id: number;
+
+  // imageLinks: { [key: string]: string };
+  title: string;
+  description: string;
+  thumbnail: {
+    path: string;
+    extension: string;
   };
+  prices: Array<{ price: number; type: string }>;
 }
 export type ErrorObject = {
   title: string;

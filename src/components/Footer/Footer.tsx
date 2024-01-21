@@ -14,10 +14,10 @@ const Footer = () => {
           sx={{ display: { xs: 'none', md: 'block' } }}
         >
           Copyright ©
-          <Link color="inherit" href="https://github.com/Elvehnn" target="_blank">
+          <Link color="inherit" href="https://github.com/Elvehnn/Marvels" target="_blank">
             Elena Shashina
           </Link>
-          , 2022.
+          , 2024.
         </Typography>
 
         <Typography
@@ -27,10 +27,10 @@ const Footer = () => {
           sx={{ display: { xs: 'block', md: 'none' } }}
         >
           Copyright ©
-          <Link color="inherit" href="https://github.com/Elvehnn" target="_blank">
+          <Link color="inherit" href="https://github.com/Elvehnn/Marvels" target="_blank">
             Elena
           </Link>
-          , 2022.
+          , 2024.
         </Typography>
       </Box>
     </Box>

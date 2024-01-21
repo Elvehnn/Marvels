@@ -6,26 +6,39 @@ import { CSSTransition } from 'react-transition-group';
 
 type MainLayoutProps = {
   children?: ReactElement;
+  isMainPage?: boolean;
   searchStyle?: SearchPanelStyle;
   background?: boolean;
 };
 
-const MainLayout: FC<MainLayoutProps> = ({ children, searchStyle, background }) => {
+const MainLayout: FC<MainLayoutProps> = ({
+  children,
+  searchStyle,
+  background,
+  isMainPage = false,
+}) => {
   const mainBackground = background
-    ? { background: `url('./ZoCtEVBYKzo.jpg') no-repeat top center / cover` }
-    : { backgroundColor: '#FFF' };
+    ? {
+        background: `url('./marvel-cinematic-poster.jpg') no-repeat top center / cover`,
+        height: '100%',
+      }
+    : { backgroundColor: '#000000' };
 
   const nodeRef = useRef(null);
 
   return (
     <CSSTransition in={true} nodeRef={nodeRef} timeout={300} classNames="opacity" unmountOnExit>
-      <main className="main" style={mainBackground} ref={nodeRef}>
-        <section className="main__search">
-          <Search {...searchStyle} />
-        </section>
-        {children}
+      <>
+        <main className="main" style={mainBackground} ref={nodeRef}>
+          {!isMainPage && (
+            <section className="main__search">
+              <Search {...searchStyle} />
+            </section>
+          )}
+          {children}
+        </main>
         <Footer />
-      </main>
+      </>
     </CSSTransition>
   );
 };
