@@ -8,6 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
 import { bookDetailsReducer } from './slices/bookDetails/bookDetailsSlice';
 import { authReducer } from './slices/auth/authSlice';
+import { purchasedReducer } from './slices/purchased/purchasedSlice';
 
 const saga = createSagaMiddleware();
 
@@ -20,6 +21,7 @@ export const store = configureStore({
     isLoading: isLoadingReducer,
     error: errorReducer,
     bookDetails: bookDetailsReducer,
+    purchased: purchasedReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(saga),
 });

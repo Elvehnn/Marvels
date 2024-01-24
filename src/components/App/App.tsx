@@ -13,6 +13,7 @@ import SearchPage from '../../pages/SearchPage/SearchPage';
 import { ErrorBoundary } from '../../pages/ErrorPage/ErrorBoundary';
 import SigninPage from '../../pages/SigninPage/SigninPage';
 import { memo } from 'react';
+import PurchasedPage from '../../pages/PurchasedPage/PurchasedPage';
 
 const App = () => {
   const { error } = useAppSelector(errorSelectors.all);
@@ -28,6 +29,7 @@ const App = () => {
               <Route path={PATH.NOT_FOUND} element={<ErrorPage {...error} />} />
               <Route path={PATH.BOOK} element={<BookPage />} />
               <Route path={PATH.SIGN_IN} element={<SigninPage />} />
+              <Route path={PATH.PURCHASED} element={<PurchasedPage />} />
             </Routes>
           </Router>
         </ThemeProvider>

@@ -42,6 +42,9 @@ const themeOptions = {
     },
   },
   typography: {
+    h2: {
+      fontSize: '2rem',
+    },
     h4: {
       fontSize: '1.6rem',
     },

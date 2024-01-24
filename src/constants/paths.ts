@@ -5,4 +5,5 @@ export const PATH = {
   BOOK: '/search/book/:id',
   NOT_FOUND: '*',
   SIGN_IN: '/signin',
+  PURCHASED: '/purchased',
 };

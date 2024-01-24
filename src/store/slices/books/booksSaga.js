@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, all } from 'redux-saga/effects';
 import { booksActions } from './booksSlice';
 import { totalItemsActions } from '../totalItems/totalItemsSlice';
 import { errorActions } from '../error/errorSlice';
@@ -20,6 +20,37 @@ export function* workBookDetails({ payload }) {
       errorActions.setError({
         title: 'Что-то пошло не так...',
         description: 'Попробуйте еще раз.',
+      })
+    );
+  } finally {
+    yield put(isLoadingActions.setIsLoading(false));
+  }
+}
+
+function* workGetPurchasedBooks({ payload }) {
+  console.log(payload);
+  yield put(isLoadingActions.setIsLoading(true));
+
+  try {
+    const response = yield all(
+      payload.map((bookId) => {
+        return call(getVolumeById, bookId);
+      })
+    );
+
+    if (response.every((bookResponse) => bookResponse && bookResponse.status === 200)) {
+      const purchasedBooksArray = response.data.data.results[0];
+      yield put(bookDetailsActions.setBookDetails());
+    }
+    // return response;
+
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+    yield put(
+      errorActions.setError({
+        title: 'Что-то пошло не так...',
+        description: 'Попробуйте переформулировать запрос',
       })
     );
   } finally {
@@ -62,5 +93,6 @@ function* workGetBooksArray({ payload }) {
 
 export default function* booksSaga() {
   yield takeEvery('books/getBooksArray', workGetBooksArray);
+  yield takeEvery('purchased/getPurchasedArray', workGetPurchasedBooks);
   yield takeEvery('bookDetails/getBookDetails', workBookDetails);
 }
