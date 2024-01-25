@@ -5,6 +5,7 @@ import { errorActions } from '../error/errorSlice';
 import { isLoadingActions } from '../isLoading/isLoadingSlice';
 import { bookDetailsActions } from '../bookDetails/bookDetailsSlice';
 import { getVolumesByTitleRequest, getVolumeById } from '../../../api/api';
+import { purchasedActions } from '../purchased/purchasedSlice';
 
 export function* workBookDetails({ payload }) {
   yield put(isLoadingActions.setIsLoading(true));
@@ -39,12 +40,15 @@ function* workGetPurchasedBooks({ payload }) {
     );
 
     if (response.every((bookResponse) => bookResponse && bookResponse.status === 200)) {
-      const purchasedBooksArray = response.data.data.results[0];
-      yield put(bookDetailsActions.setBookDetails());
+      const purchasedBooksMap = response.reduce(
+        (acc, book) => ({ ...acc, [book.data.data.results[0].id]: book.data.data.results[0] }),
+        {}
+      );
+
+      // console.log(purchasedBooksMap);
+      yield put(purchasedActions.setPurchasedMap(purchasedBooksMap));
     }
     // return response;
-
-    console.log(response);
   } catch (error) {
     console.log(error);
     yield put(
@@ -93,6 +97,6 @@ function* workGetBooksArray({ payload }) {
 
 export default function* booksSaga() {
   yield takeEvery('books/getBooksArray', workGetBooksArray);
-  yield takeEvery('purchased/getPurchasedArray', workGetPurchasedBooks);
+  yield takeEvery('purchased/getPurchasedMap', workGetPurchasedBooks);
   yield takeEvery('bookDetails/getBookDetails', workBookDetails);
 }

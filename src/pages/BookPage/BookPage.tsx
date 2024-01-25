@@ -28,7 +28,7 @@ const BookPage = () => {
   }, [params]);
 
   const handlePurchase = () => {
-    dispatch(purchasedActions.setPurchasedArray(bookDetails.id));
+    dispatch(purchasedActions.addPurchasedBook(bookDetails.id));
   };
 
   return (

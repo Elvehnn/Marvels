@@ -4,9 +4,9 @@ import './MainLayout.scss';
 import { CSSTransition } from 'react-transition-group';
 import { SearchPanelStyle } from '../Search/Search';
 import AppBar from '@mui/material/AppBar';
-import Link from '@mui/material/Link';
 import { useAppSelector } from '../../store/hooks';
 import { authSelectors } from '../../store/slices/auth/authSlice';
+import { Link } from 'react-router-dom';
 
 type MainLayoutProps = {
   children?: React.ReactNode;
@@ -48,22 +48,22 @@ const MainLayout: FC<MainLayoutProps> = ({
             <AppBar className="header" data-testid="header" sx={{ ...style, ...headerStyle }}>
               {isAuth ? (
                 <div className="container">
-                  <Link href="/" variant="body2" color="#fff" underline="hover">
+                  <Link to="/" color="#fff">
                     На главную
                   </Link>
-                  <Link href="/favourites" variant="body2" color="#fff" underline="hover">
+                  <Link to="/favourites" color="#fff">
                     Избранное
                   </Link>
-                  <Link href="/purchased" variant="body2" color="#fff" underline="hover">
+                  <Link to="/purchased" color="#fff">
                     Приобретения
                   </Link>
                 </div>
               ) : (
                 <div className="container">
-                  <Link href="/signin" variant="body2" color="#fff" underline="hover">
+                  <Link to="/signin" color="#fff">
                     Войти
                   </Link>
-                  <Link href="/" variant="body2" color="#fff" underline="hover">
+                  <Link to="/" color="#fff">
                     На главную
                   </Link>
                 </div>

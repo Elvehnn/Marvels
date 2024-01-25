@@ -11,12 +11,14 @@ import { errorSelectors } from '../../store/slices/error/errorSlice';
 import LoadingButton from '@mui/lab/LoadingButton';
 import CircularProgress from '@mui/material/CircularProgress';
 import { isLoadingActions, isLoadingSelectors } from '../../store/slices/isLoading/isLoadingSlice';
+import { authSelectors } from '../../store/slices/auth/authSlice';
 
 const PurchasedPage = () => {
   const dispatch = useAppDispatch();
   const { purchased } = useAppSelector(purchasedSelectors.all);
   const { error } = useAppSelector(errorSelectors.all);
   const { isLoading } = useAppSelector(isLoadingSelectors.all);
+  const { isAuth } = useAppSelector(authSelectors.all);
   const nodeRef = useRef(null);
   const [purchasedBooks, setPurchasedBooks] = useState<Array<Book>>([]);
 
@@ -36,8 +38,14 @@ const PurchasedPage = () => {
   // };
 
   useEffect(() => {
-    dispatch(purchasedActions.getPurchasedArray([2088, 1158]));
+    dispatch(purchasedActions.getPurchasedMap([2088, 1158]));
   }, []);
+
+  const purchasedKeys = Object.keys(purchased);
+  const purchasedLength = purchasedKeys.length;
+
+  console.log(purchased);
+  console.log(isAuth);
 
   return (
     <MainLayout>
@@ -50,28 +58,28 @@ const PurchasedPage = () => {
             sx={{ p: '15px' }}
             data-testid="main-title"
           >
-            {purchased.length
-              ? `Вы счастливый обладатель ${purchased.length} книг`
+            {purchasedLength
+              ? `Вы счастливый обладатель ${purchasedLength} книг`
               : 'Все еще впереди'}
           </Typography>
         }
 
         <CSSTransition
-          in={Boolean(purchasedBooks.length)}
+          in={Boolean(purchasedLength)}
           nodeRef={nodeRef}
           timeout={300}
           classNames="opacity"
           unmountOnExit
         >
           <div className="cards-container" ref={nodeRef}>
-            {purchasedBooks.map((book) => {
-              return <BookPreview key={book.id} {...book} />;
+            {purchasedKeys.map((key) => {
+              return <BookPreview key={purchased[+key].id} {...purchased[+key]} />;
             })}
           </div>
         </CSSTransition>
 
         <CSSTransition
-          in={Boolean(!purchasedBooks.length)}
+          in={Boolean(!purchasedLength)}
           nodeRef={nodeRef}
           timeout={300}
           classNames="opacity"
