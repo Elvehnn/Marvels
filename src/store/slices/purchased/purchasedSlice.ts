@@ -1,24 +1,19 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
-import { Book } from '../../../constants/interfaces';
-
-export type PurchasedBookMap = Record<Book['id'], Book>;
 
 export const purchasedSlice = createSlice({
   name: 'purchased',
-  initialState: { purchased: [] as PurchasedBookMap },
+  initialState: { purchased: <string[]>[] },
   reducers: {
-    getPurchasedMap: (state, { payload }: PayloadAction<Array<Book['id']>>) => {
+    getPurchasedMap: (state, { payload }: PayloadAction<string[]>) => {
       return state;
     },
-    addPurchasedBook: (state, { payload }: PayloadAction<Book['id']>) => {
-      state.purchased = { ...state.purchased, [payload]: <Book>{} };
+    addPurchasedBook: (state, { payload }: PayloadAction<string>) => {
+      state.purchased = [...state.purchased, payload];
     },
-    setPurchasedMap: (state, { payload }: PayloadAction<PurchasedBookMap>) => {
-      state.purchased = { ...state.purchased, ...payload };
-    },
+
     resetPurchasedMap: (state) => {
-      state.purchased = {};
+      state.purchased = [];
     },
   },
 });

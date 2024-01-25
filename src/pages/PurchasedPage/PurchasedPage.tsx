@@ -12,6 +12,9 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import CircularProgress from '@mui/material/CircularProgress';
 import { isLoadingActions, isLoadingSelectors } from '../../store/slices/isLoading/isLoadingSlice';
 import { authSelectors } from '../../store/slices/auth/authSlice';
+import { getVolumesByIdsArray } from '../../api/api';
+import Button from '@mui/material/Button';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 const PurchasedPage = () => {
   const dispatch = useAppDispatch();
@@ -37,18 +40,35 @@ const PurchasedPage = () => {
   //   dispatch(isLoadingActions.setIsLoading(false));
   // };
 
+  const getPurchasedBooks = async (ids: string[]) => {
+    const responses = await getVolumesByIdsArray(ids);
+    console.log(responses);
+    setPurchasedBooks(responses);
+  };
+
   useEffect(() => {
-    dispatch(purchasedActions.getPurchasedMap([2088, 1158]));
+    getPurchasedBooks(purchased);
   }, []);
 
-  const purchasedKeys = Object.keys(purchased);
-  const purchasedLength = purchasedKeys.length;
+  const purchasedLength = purchased.length;
 
   console.log(purchased);
   console.log(isAuth);
 
   return (
     <MainLayout>
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: 'transparent',
+          color: 'primary.main',
+          opacity: 0.9,
+          mt: '20px',
+        }}
+        onClick={() => history.back()}
+      >
+        <KeyboardBackspaceIcon sx={{ fontSize: '35px' }} />
+      </Button>
       <div className="search-results">
         {
           <Typography
@@ -72,8 +92,8 @@ const PurchasedPage = () => {
           unmountOnExit
         >
           <div className="cards-container" ref={nodeRef}>
-            {purchasedKeys.map((key) => {
-              return <BookPreview key={purchased[+key].id} {...purchased[+key]} />;
+            {purchasedBooks.map((book) => {
+              return <BookPreview key={book.id} {...book} />;
             })}
           </div>
         </CSSTransition>

@@ -38,14 +38,14 @@ function* workGetPurchasedBooks({ payload }) {
         return call(getVolumeById, bookId);
       })
     );
-
+    console.log(response);
     if (response.every((bookResponse) => bookResponse && bookResponse.status === 200)) {
       const purchasedBooksMap = response.reduce(
         (acc, book) => ({ ...acc, [book.data.data.results[0].id]: book.data.data.results[0] }),
         {}
       );
 
-      // console.log(purchasedBooksMap);
+      console.log(purchasedBooksMap);
       yield put(purchasedActions.setPurchasedMap(purchasedBooksMap));
     }
     // return response;

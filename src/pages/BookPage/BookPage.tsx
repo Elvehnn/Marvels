@@ -13,7 +13,7 @@ import { isLoadingSelectors } from '../../store/slices/isLoading/isLoadingSlice'
 import { CSSTransition } from 'react-transition-group';
 import MainLayout from '../../components/MainLayout/MainLayout';
 import { authSelectors } from '../../store/slices/auth/authSlice';
-import { purchasedActions } from '../../store/slices/purchased/purchasedSlice';
+import { purchasedActions, purchasedSelectors } from '../../store/slices/purchased/purchasedSlice';
 
 const BookPage = () => {
   const dispatch = useAppDispatch();
@@ -22,13 +22,16 @@ const BookPage = () => {
   const { bookDetails } = useAppSelector(bookDetailsSelectors.all);
   const { isLoading } = useAppSelector(isLoadingSelectors.all);
   const { isAuth } = useAppSelector(authSelectors.all);
+  const { purchased } = useAppSelector(purchasedSelectors.all);
+
+  const isPurchased = purchased.includes(String(bookDetails.id));
 
   useEffect(() => {
     dispatch(bookDetailsActions.getBookDetails(params));
   }, [params]);
 
   const handlePurchase = () => {
-    dispatch(purchasedActions.addPurchasedBook(bookDetails.id));
+    dispatch(purchasedActions.addPurchasedBook(String(bookDetails.id)));
   };
 
   return (
@@ -74,26 +77,38 @@ const BookPage = () => {
 
               <p className="book-page__description">{bookDetails.description}</p>
 
-              {bookDetails.prices[0].price && (
+              {bookDetails.prices[0].price > 0 && (
                 <Typography className="book-page__price" variant="h3">
                   ${bookDetails.prices[0].price}
                 </Typography>
               )}
 
               {isAuth ? (
-                <Button
-                  variant="contained"
-                  // disabled={bookDetails.prices[0].price === 0 || !bookDetails.prices[0].price}
-                  sx={{
-                    backgroundColor: 'primary.main',
-                    color: 'primary.contrastText',
-                    opacity: 0.9,
-                    mt: '20px',
-                  }}
-                  onClick={handlePurchase}
-                >
-                  Купить
-                </Button>
+                <>
+                  <Button
+                    variant="contained"
+                    // disabled={bookDetails.prices[0].price === 0 || !bookDetails.prices[0].price}
+                    sx={{
+                      backgroundColor: 'primary.main',
+                      color: 'primary.contrastText',
+                      opacity: isPurchased ? 0.2 : 0.9,
+                      mt: '20px',
+                      pointerEvents: isPurchased ? 'none' : 'auto',
+                    }}
+                    onClick={handlePurchase}
+                  >
+                    Купить
+                  </Button>
+                  {isPurchased && (
+                    <Typography
+                      className="book-page__warning"
+                      variant="h6"
+                      sx={{ fontWeight: '400', m: '15px 0', color: 'warning.main' }}
+                    >
+                      Уже есть в вашей коллекции
+                    </Typography>
+                  )}
+                </>
               ) : (
                 <Typography
                   className="book-page__warning"

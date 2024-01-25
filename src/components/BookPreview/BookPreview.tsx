@@ -12,7 +12,7 @@ export const BookPreview = (props: Book) => {
 
   const handleBookPreviewClick = async (book: Book) => {
     dispatch(bookDetailsActions.getBookDetails(String(book.id)));
-    navigate(`book/${book.id}`);
+    navigate(`/book/${book.id}`);
   };
 
   return (
