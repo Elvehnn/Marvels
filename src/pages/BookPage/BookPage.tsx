@@ -25,6 +25,7 @@ const BookPage = () => {
   const { purchased } = useAppSelector(purchasedSelectors.all);
 
   const isPurchased = purchased.includes(String(bookDetails.id));
+  const hasPrice = bookDetails.prices && bookDetails.prices[0].price > 0;
 
   useEffect(() => {
     dispatch(bookDetailsActions.getBookDetails(params));
@@ -90,14 +91,15 @@ const BookPage = () => {
                     sx={{
                       backgroundColor: 'primary.main',
                       color: 'primary.contrastText',
-                      opacity: isPurchased ? 0.2 : 0.9,
+                      opacity: isPurchased || !hasPrice ? 0.2 : 0.9,
                       mt: '20px',
-                      pointerEvents: isPurchased ? 'none' : 'auto',
+                      pointerEvents: isPurchased || !hasPrice ? 'none' : 'auto',
                     }}
                     onClick={handlePurchase}
                   >
                     Купить
                   </Button>
+
                   {isPurchased && (
                     <Typography
                       className="book-page__warning"
@@ -105,6 +107,16 @@ const BookPage = () => {
                       sx={{ fontWeight: '400', m: '15px 0', color: 'warning.main' }}
                     >
                       Уже есть в вашей коллекции
+                    </Typography>
+                  )}
+
+                  {!hasPrice && (
+                    <Typography
+                      className="book-page__warning"
+                      variant="h6"
+                      sx={{ fontWeight: '400', m: '15px 0', color: 'warning.main' }}
+                    >
+                      Книга отсутствует в продаже
                     </Typography>
                   )}
                 </>

@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import MainLayout from '../../components/MainLayout/MainLayout';
-import SigninForm from '../../components/SigninForm';
+import SigninForm from '../../components/SigninForm/SigninForm';
 
 const SigninPage = () => {
   return (
-    <MainLayout isMainPage>
+    <MainLayout>
       <SigninForm />
     </MainLayout>
   );

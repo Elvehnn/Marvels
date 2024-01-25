@@ -6,6 +6,7 @@ import { PATH } from '../../constants/paths';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { isLoadingActions, isLoadingSelectors } from '../../store/slices/isLoading/isLoadingSlice';
 import { authActions } from '../../store/slices/auth/authSlice';
+import './SigninForm.scss';
 
 export type AuthFormInputs = {
   login: string;
@@ -52,11 +53,11 @@ const SigninForm = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContext: 'center',
-          minHeight: '100vh',
           color: '#fff',
+          paddingTop: '100px',
         }}
       >
-        <form className="form" data-testid="auth_form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <div className="auth">
             <div className="auth-container">
               <TextField
@@ -64,33 +65,37 @@ const SigninForm = () => {
                 variant="outlined"
                 className="text-input"
                 sx={{
-                  height: '100%',
+                  width: '100%',
+                  height: '56px',
                   backgroundColor: '#fff',
-                  borderRadius: '6px 0 0 6px',
+                  borderRadius: '6px',
                 }}
-                placeholder="Enter login"
-                {...register('login', { required: 'Login is empty!' })}
+                placeholder="Введите логин"
+                {...register('login', { required: 'Пустая строка!' })}
               />
-              {errors.login && <p>Login is required!</p>}
+              {errors.login && <p className="form_error">Login is required!</p>}
+            </div>
 
+            <div className="auth-container">
               <TextField
                 data-testid="password-input"
                 variant="outlined"
-                className="text-input"
+                className="form_input"
                 sx={{
-                  height: '100%',
+                  width: '100%',
+                  height: '56px',
                   backgroundColor: '#fff',
-                  borderRadius: '6px 0 0 6px',
+                  borderRadius: '6px',
                 }}
-                placeholder="Enter password"
-                {...register('password', { required: 'Password is empty!' })}
+                placeholder="Введите пароль"
+                {...register('password', { required: 'Пустая строка!' })}
               />
-            </div>
 
-            {errors.password && <p>Password is required!</p>}
+              {errors.password && <p className="form_error">Password is required!</p>}
+            </div>
           </div>
 
-          <div className="search__options">
+          <div className="form_buttons">
             <Button
               variant="outlined"
               className="cancel_btn"
@@ -107,7 +112,7 @@ const SigninForm = () => {
                 minWidth: '0',
                 height: '100%',
                 backgroundColor: '#87A8EC',
-                borderRadius: '0 4px 4px 0',
+                borderRadius: '4px 4px',
               }}
               className="login_btn"
               data-testid="login-btn"

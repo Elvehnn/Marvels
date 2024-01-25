@@ -71,14 +71,15 @@ const Search = () => {
 
   const handleReset = () => {
     dispatch(searchParamsActions.resetSearchParams());
+    dispatch(booksActions.resetBooksArray());
     localStorage.removeItem('lastSearch');
     reset({ newSearchValue: '' });
   };
 
   return (
-    <Box>
-      <h1 className="header__title" data-testid="header-title" onClick={handleTitleClick}>
-        Book search
+    <Box className="header">
+      <h1 className="page-title" onClick={handleTitleClick}>
+        Искать что-нибудь особенное
       </h1>
 
       <form className="form" data-testid="form" onSubmit={handleSubmit(onSubmit)}>
@@ -90,17 +91,18 @@ const Search = () => {
               className="search-input"
               defaultValue={searchValue}
               sx={{
-                height: '100%',
                 backgroundColor: '#fff',
                 borderRadius: '6px 0 0 6px',
+                border: 'none',
               }}
               placeholder="Type here for searching…"
               {...register('newSearchValue', { required: 'Nothing to search!' })}
             />
+
             <Button
               variant="text"
               sx={{
-                padding: '6px 16px',
+                padding: '16px',
                 minWidth: '0',
                 height: '100%',
                 backgroundColor: '#87A8EC',

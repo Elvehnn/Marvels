@@ -25,9 +25,8 @@ const BookPreview = (props: Book) => {
         display: 'flex',
         cursor: 'pointer',
         backgroundColor: '#ggg',
-        width: '350px',
-        height: '220px',
-        minHeight: '150px',
+        width: '200px',
+        height: '300px',
       }}
       onClick={() => handleBookPreviewClick(props)}
     >
@@ -35,7 +34,7 @@ const BookPreview = (props: Book) => {
         className="book__preview"
         data-testid="book-preview"
         style={{
-          background: `url('${props.thumbnail.path}/portrait_small.${props.thumbnail.extension}') no-repeat center center `,
+          background: `url('${props.thumbnail.path}/portrait_medium.${props.thumbnail.extension}') no-repeat center center `,
           backgroundSize: 'contain',
         }}
       ></div>

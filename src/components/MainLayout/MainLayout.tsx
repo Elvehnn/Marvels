@@ -45,22 +45,22 @@ const MainLayout: FC<MainLayoutProps> = ({
             <AppBar className="header" data-testid="header" sx={{ ...style }}>
               {isAuth ? (
                 <div className="container">
-                  <Link to="/" color="#fff">
+                  <Link to="/" className="header_link">
                     На главную
                   </Link>
-                  <Link to="/favourites" color="#fff">
+                  {/* <Link to="/favourites" color="#fff" className='header_link'>
                     Избранное
-                  </Link>
-                  <Link to="/purchased" color="#fff">
+                  </Link> */}
+                  <Link to="/purchased" className="header_link">
                     Приобретения
                   </Link>
                 </div>
               ) : (
                 <div className="container">
-                  <Link to="/signin" color="#fff">
+                  <Link to="/signin" color="#fff" className="header_link">
                     Войти
                   </Link>
-                  <Link to="/" color="#fff">
+                  <Link to="/" color="#fff" className="header_link">
                     На главную
                   </Link>
                 </div>

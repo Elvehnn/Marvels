@@ -4,11 +4,11 @@ import './ErrorPage.scss';
 
 export const ErrorPage = (props: ErrorObject) => {
   return (
-    <div className="error-page-wrapper" data-testid="error-page-wrapper">
-      <Typography variant="h4" color="error">
+    <div className="error-page">
+      <Typography variant="h4" color="warning">
         {props.title}
       </Typography>
-      <h4>{props.description}</h4>
+      <h4 className="error-page_description">{props.description}</h4>
     </div>
   );
 };

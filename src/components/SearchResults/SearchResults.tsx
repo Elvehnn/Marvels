@@ -48,7 +48,7 @@ const SearchResults = () => {
         <Typography
           variant="h4"
           align="center"
-          color="text.secondary"
+          color="primary.main"
           sx={{ p: '15px' }}
           data-testid="main-title"
         >
