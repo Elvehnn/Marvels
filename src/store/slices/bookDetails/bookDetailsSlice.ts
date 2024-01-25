@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { Book } from '../../../constants/interfaces';

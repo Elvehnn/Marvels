@@ -2,6 +2,7 @@ import './Footer.scss';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import { memo } from 'react';
 
 const Footer = () => {
   return (
@@ -37,4 +38,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

@@ -87,7 +87,6 @@ const BookPage = () => {
                 <>
                   <Button
                     variant="contained"
-                    // disabled={bookDetails.prices[0].price === 0 || !bookDetails.prices[0].price}
                     sx={{
                       backgroundColor: 'primary.main',
                       color: 'primary.contrastText',
@@ -128,5 +127,4 @@ const BookPage = () => {
   );
 };
 
-const memoBookPage = memo(BookPage);
-export default memoBookPage;
+export default memo(BookPage);

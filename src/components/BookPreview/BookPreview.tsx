@@ -5,8 +5,9 @@ import { Book } from '../../constants/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store/hooks';
 import { bookDetailsActions } from '../../store/slices/bookDetails/bookDetailsSlice';
+import { memo } from 'react';
 
-export const BookPreview = (props: Book) => {
+const BookPreview = (props: Book) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -51,3 +52,5 @@ export const BookPreview = (props: Book) => {
     </Card>
   );
 };
+
+export default memo(BookPreview);

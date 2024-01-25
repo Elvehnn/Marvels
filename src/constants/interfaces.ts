@@ -1,12 +1,3 @@
-// export interface ActionPayload {
-//   isSticky?: boolean;
-//   searchValue?: string;
-//   searchResult?: Book[];
-//   totalItems?: number;
-//   selectedBook?: Book | null;
-//   error?: ErrorObject;
-// }
-
 export interface Action {
   type: string;
   isLoading?: boolean;
@@ -19,8 +10,6 @@ export interface Action {
 
 export interface Book {
   id: number;
-
-  // imageLinks: { [key: string]: string };
   title: string;
   description: string;
   thumbnail: {
@@ -29,6 +18,7 @@ export interface Book {
   };
   prices: Array<{ price: number; type: string }>;
 }
+
 export type ErrorObject = {
   title: string;
   description: string;

@@ -1,8 +1,9 @@
 import SearchResults from '../../components/SearchResults/SearchResults';
 import MainLayout from '../../components/MainLayout/MainLayout';
 import Search from '../../components/Search/Search';
+import { memo } from 'react';
 
-const Main = () => {
+const SearchPage = () => {
   return (
     <MainLayout>
       <Search />
@@ -11,4 +12,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default memo(SearchPage);

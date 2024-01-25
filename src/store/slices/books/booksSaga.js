@@ -1,11 +1,10 @@
-import { call, put, takeEvery, all } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { booksActions } from './booksSlice';
 import { totalItemsActions } from '../totalItems/totalItemsSlice';
 import { errorActions } from '../error/errorSlice';
 import { isLoadingActions } from '../isLoading/isLoadingSlice';
 import { bookDetailsActions } from '../bookDetails/bookDetailsSlice';
 import { getVolumesByTitleRequest, getVolumeById } from '../../../api/api';
-import { purchasedActions } from '../purchased/purchasedSlice';
 
 export function* workBookDetails({ payload }) {
   yield put(isLoadingActions.setIsLoading(true));
@@ -21,40 +20,6 @@ export function* workBookDetails({ payload }) {
       errorActions.setError({
         title: 'Что-то пошло не так...',
         description: 'Попробуйте еще раз.',
-      })
-    );
-  } finally {
-    yield put(isLoadingActions.setIsLoading(false));
-  }
-}
-
-function* workGetPurchasedBooks({ payload }) {
-  console.log(payload);
-  yield put(isLoadingActions.setIsLoading(true));
-
-  try {
-    const response = yield all(
-      payload.map((bookId) => {
-        return call(getVolumeById, bookId);
-      })
-    );
-    console.log(response);
-    if (response.every((bookResponse) => bookResponse && bookResponse.status === 200)) {
-      const purchasedBooksMap = response.reduce(
-        (acc, book) => ({ ...acc, [book.data.data.results[0].id]: book.data.data.results[0] }),
-        {}
-      );
-
-      console.log(purchasedBooksMap);
-      yield put(purchasedActions.setPurchasedMap(purchasedBooksMap));
-    }
-    // return response;
-  } catch (error) {
-    console.log(error);
-    yield put(
-      errorActions.setError({
-        title: 'Что-то пошло не так...',
-        description: 'Попробуйте переформулировать запрос',
       })
     );
   } finally {
@@ -97,6 +62,5 @@ function* workGetBooksArray({ payload }) {
 
 export default function* booksSaga() {
   yield takeEvery('books/getBooksArray', workGetBooksArray);
-  yield takeEvery('purchased/getPurchasedMap', workGetPurchasedBooks);
   yield takeEvery('bookDetails/getBookDetails', workBookDetails);
 }

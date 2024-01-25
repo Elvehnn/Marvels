@@ -2,7 +2,6 @@ import { FC, memo, useRef } from 'react';
 import Footer from '../Footer/Footer';
 import './MainLayout.scss';
 import { CSSTransition } from 'react-transition-group';
-import { SearchPanelStyle } from '../Search/Search';
 import AppBar from '@mui/material/AppBar';
 import { useAppSelector } from '../../store/hooks';
 import { authSelectors } from '../../store/slices/auth/authSlice';
@@ -11,7 +10,6 @@ import { Link } from 'react-router-dom';
 type MainLayoutProps = {
   children?: React.ReactNode;
   isMainPage?: boolean;
-  headerStyle?: SearchPanelStyle;
   background?: boolean;
 };
 
@@ -26,7 +24,6 @@ const style = {
 
 const MainLayout: FC<MainLayoutProps> = ({
   children,
-  headerStyle,
   background,
   isMainPage = false,
 }: MainLayoutProps) => {
@@ -45,7 +42,7 @@ const MainLayout: FC<MainLayoutProps> = ({
       <>
         <main className="main" style={mainBackground} ref={nodeRef}>
           {!isMainPage && (
-            <AppBar className="header" data-testid="header" sx={{ ...style, ...headerStyle }}>
+            <AppBar className="header" data-testid="header" sx={{ ...style }}>
               {isAuth ? (
                 <div className="container">
                   <Link to="/" color="#fff">

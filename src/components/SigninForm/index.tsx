@@ -63,7 +63,6 @@ const SigninForm = () => {
                 data-testid="login-input"
                 variant="outlined"
                 className="text-input"
-                // defaultValue={searchValue}
                 sx={{
                   height: '100%',
                   backgroundColor: '#fff',
@@ -78,7 +77,6 @@ const SigninForm = () => {
                 data-testid="password-input"
                 variant="outlined"
                 className="text-input"
-                // defaultValue={searchValue}
                 sx={{
                   height: '100%',
                   backgroundColor: '#fff',

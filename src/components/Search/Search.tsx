@@ -24,19 +24,7 @@ export type FormInputs = {
   newCategory: string;
 };
 
-export type SearchPanelStyle = {
-  flexGrow?: number;
-  position?: string;
-  top?: number;
-  left?: number;
-  borderRadius?: number;
-  height?: string;
-  flexDirection?: string;
-  alignItems?: string;
-  rowGap?: string;
-};
-
-const Search = (style: SearchPanelStyle) => {
+const Search = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector(isLoadingSelectors.all);
@@ -138,18 +126,6 @@ const Search = (style: SearchPanelStyle) => {
 
           {errors.newSearchValue && <p>Value is required!</p>}
         </div>
-
-        {/* <div className="search__options">
-          <Button
-            variant="outlined"
-            className="search__reset-btn"
-            data-testid="search-reset-btn"
-            onClick={handleReset}
-            disabled={isLoading}
-          >
-            Reset
-          </Button>
-        </div> */}
       </form>
     </Box>
   );

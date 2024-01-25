@@ -1,7 +1,7 @@
 import './SearchResults.scss';
 import Typography from '@mui/material/Typography';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { BookPreview } from '../BookPreview/BookPreview';
+import BookPreview from '../BookPreview/BookPreview';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { memo, useRef, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -18,7 +18,6 @@ import { ITEMS_PER_PAGE } from '../../constants/constants';
 import { ErrorPage } from '../../pages/ErrorPage/ErrorPage';
 import { errorSelectors } from '../../store/slices/error/errorSlice';
 import { CSSTransition } from 'react-transition-group';
-import { purchasedSelectors } from '../../store/slices/purchased/purchasedSlice';
 
 const SearchResults = () => {
   const dispatch = useAppDispatch();
@@ -28,9 +27,6 @@ const SearchResults = () => {
   const { searchParams } = useAppSelector(searchParamsSelectors.all);
   const { isLoading } = useAppSelector(isLoadingSelectors.all);
   const { error } = useAppSelector(errorSelectors.all);
-  // const { purchased } = useAppSelector(purchasedSelectors.all);
-
-  // console.log(purchased);
 
   const [paginationDisabled, setPaginationDisabled] = useState(false);
 
