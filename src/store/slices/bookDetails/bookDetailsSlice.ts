@@ -6,6 +6,7 @@ export const bookDetailsSlice = createSlice({
   name: 'bookDetails',
   initialState: { bookDetails: {} as Book },
   reducers: {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     getBookDetails: (state, { payload }: PayloadAction<string>) => {
       return state;
     },

@@ -7,6 +7,7 @@ export const booksSlice = createSlice({
   name: 'books',
   initialState: { booksArray: [] as Book[] },
   reducers: {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     getBooksArray: (state, { payload }: PayloadAction<SearchParams>) => {
       return state;
     },
