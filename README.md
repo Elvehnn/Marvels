@@ -6,8 +6,11 @@
 - Страница с описанием комикса.
 - Страница купленных комиксов (доступна после авторизации)
 
-
 API: [Marvel API](https://developer.marvel.com/).
+
+## Деплой
+
+[https://marvel-lib.netlify.app/](https://marvel-lib.netlify.app/)
 
 ## Функционал
 
